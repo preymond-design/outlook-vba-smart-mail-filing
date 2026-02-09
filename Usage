@@ -1,0 +1,30 @@
+# Usage
+
+## Run
+
+- Select one or more emails in an Outlook Explorer window
+- Run the macro: `StoreMail_UserForm`
+
+## What happens
+
+1. The tool inspects the selected email’s conversation.
+2. It searches for other emails in that conversation and collects the parent folders.
+3. Outcomes:
+   - 1 folder found: moves immediately
+   - Multiple folders found: shows a picker
+   - None found: shows a full folder list from the same store, with a live filter
+
+## Tips
+
+- Use the filter box to type a few letters (project name, customer, site) and press Enter or click.
+- If you want to exclude folders (e.g., Inbox, Sent Items, Deleted Items), edit the ignored list in `FrmStoreEmail`:
+  - Look for `IgnoredFirstLevelFolders` / `IsInIgnoredFirstLevel`.
+
+## Customize
+
+Common tweaks you might want:
+- Define what is considered an “eligible folder”
+- Add more ignored folders
+- Change the form caption or theme
+
+All of this is in `src/FrmStoreEmail.frm` inside the form code.
