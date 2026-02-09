@@ -1,0 +1,36 @@
+# Outlook VBA Store Email (Conversation-Aware)
+
+A lightweight Outlook VBA tool that helps you file emails fast, with **smart folder suggestions based on the current conversation**.
+
+It was built for people who want less dragging, less clicking, and fewer “where did I put that?” moments.
+
+## What it does
+
+- Looks at the selected email and tries to find **where other emails from the same conversation already live**
+- If it finds exactly one matching target folder, it can **move the email immediately** (no UI)
+- If it finds multiple candidates, it shows a **UserForm** so you can pick the right folder
+- If it finds none, it lists **all eligible folders in the same store** (Mailbox / PST), with a **live filter** to search quickly
+- Moves the selected email(s) to the chosen folder
+
+## Files in this repo
+
+- `src/StoreEmail.bas`  
+  Entry macro: `StoreMail_UserForm` (this is what you assign to a button / shortcut)
+- `src/FrmStoreEmail.frm` + `src/FrmStoreEmail.frx`  
+  The UserForm (UI + code)
+
+## Quick start
+
+1. Follow the installation guide: `docs/INSTALLATION.md`
+2. In Outlook, run the macro: `StoreMail_UserForm`
+3. (Optional) Add it to the Quick Access Toolbar (QAT) or Ribbon
+
+## Notes and limitations
+
+- Works on **Outlook Desktop (Windows)**. Outlook on the web and Mac do not run VBA macros.
+- Folder eligibility and ignored folders can be adjusted in the form code (see comments in `FrmStoreEmail`).
+- Outlook may block macros depending on your Trust Center settings (see installation guide).
+
+## License
+
+Choose a license that matches your intent (MIT is a common default for sharing). If you want, I can add a `LICENSE` file and a short “how to credit” note.
