@@ -1,0 +1,84 @@
+# Installation (Outlook VBA)
+
+This guide installs the module + UserForm into Outlook Desktop (Windows).
+
+## Prerequisites
+
+- Outlook Desktop for Windows
+- You can open the VBA editor (Alt + F11)
+- Macros are allowed by your organization (or at least for your own local Outlook)
+
+## Step 1: Enable macros (Trust Center)
+
+1. Outlook: File > Options > Trust Center > Trust Center Settings
+2. Macro Settings:
+   - Recommended for personal use: **Notifications for digitally signed macros, all other macros disabled**
+   - If you are testing locally: **Disable all macros with notification** (then enable when prompted)
+3. Restart Outlook if needed
+
+If you are in a corporate environment with strict policy, you may need to:
+- Sign the macro project with a certificate, or
+- Ask IT for guidance (don’t fight the policy, it always wins)
+
+## Step 2: Open the VBA editor
+
+- In Outlook: press **Alt + F11**
+
+In the left panel (Project Explorer), find:
+- `Project1 (VbaProject.OTM)` (name may vary)
+
+## Step 3: Import the module (.bas)
+
+1. In VBA editor: File > Import File
+2. Select: `src/StoreEmail.bas`
+3. You should now see a module named **StoreEmail**.
+
+## Step 4: Import the UserForm (.frm + .frx)
+
+1. In VBA editor: File > Import File
+2. Select: `src/FrmStoreEmail.frm`
+
+Important:
+- Keep `FrmStoreEmail.frx` in the same folder as the `.frm` when importing
+- VBA will automatically load the `.frx` as the form’s binary resource
+
+You should now see:
+- A form named **FrmStoreEmail**
+
+## Step 5: Save and restart
+
+1. Press Ctrl + S in the VBA editor
+2. Close the VBA editor
+3. Restart Outlook (recommended)
+
+## Step 6: Test
+
+1. Select an email in your Inbox
+2. Run the macro:
+   - Alt + F8
+   - Select **StoreMail_UserForm**
+   - Run
+
+If you see the form (or the email moves automatically), you’re good.
+
+## Optional: Add to Quick Access Toolbar (QAT)
+
+1. Outlook: File > Options > Quick Access Toolbar
+2. In “Choose commands from”, pick **Macros**
+3. Add `Project1.StoreMail_UserForm` (name may differ) to the QAT
+4. Use Alt + number to trigger it (Outlook assigns the number)
+
+## Troubleshooting
+
+### “Macros are disabled”
+- Check Trust Center settings
+- Restart Outlook
+- If corporate-managed, ask IT (or sign the macro project)
+
+### Importing the form fails
+- Ensure `.frm` and `.frx` are in the same folder
+- Re-export the form if it was copied from elsewhere
+
+### It fails when moving a just-received email
+- This tool includes a save-then-move approach (see `TrySaveAndMove` in the form).
+- If you still hit edge cases, switching selection or folder typically releases the Outlook lock.
